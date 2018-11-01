@@ -1,2 +1,2 @@
-# Machine-Learning-Notes
-机器学习学习笔记~
+# Machine-Learning-Projects
+Here are some small projects using the methods or the algorithms of the machine learning.
