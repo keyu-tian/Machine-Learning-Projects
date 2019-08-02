@@ -3,7 +3,7 @@
  * Supervised Learning
  * for Classification (Multi-class Classification)
  *
- * 矩阵类：自敲，模板类（便于编译器检查行列匹配等问题）
+ * 矩阵类：模板类（便于编译器检查行列匹配等问题）
  * 隐含层层数：两层
  * 隐含层神经元个数：自定
  * Tranint Data：4位二进制数 <-> 对应位置
