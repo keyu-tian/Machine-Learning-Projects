@@ -37,19 +37,16 @@ class BP
 		InputsType		&inputs;		// 训练用输入（向量）
 		OutputsType		&outputs;		// 训练用输入（向量）
 
-		Matrix<  1	,	L1_AMT>			B1h1;	 // 第一层的偏置系数（向量）
-		Matrix<INPUT_AMT,	L1_AMT>			Wih1;	 // 输入层和第一隐含层的突触（矩阵）
-		Matrix<  1	,	L1_AMT>			H1h1;	 // 第一隐含层神经元（向量）
-		Matrix<  1	,	L2_AMT>			B1h2;	 // 第二层的偏置系数（向量）
-		Matrix<L1_AMT,		L2_AMT>			Wh1h2;	 // 第一和第二隐含层间的突触（矩阵）
-		Matrix<  1	,	L2_AMT>			H1h2;	 // 第二隐含层神经元（向量）
+		Matrix<  1	,	L1_AMT>			B1h1;	 // 第一隐层的偏置系数（向量）
+		Matrix<INPUT_AMT,	L1_AMT>			Wih1;	 // 输入层和第一隐层的权重（矩阵）
+		Matrix<  1	,	L2_AMT>			B1h2;	 // 第二隐层的偏置系数（向量）
+		Matrix<L1_AMT,		L2_AMT>			Wh1h2;	 // 第一隐层和第二隐层间的权重（矩阵）
 		Matrix<  1	,	OUTPUT_AMT>		B1o;	 // 输出层的偏置系数（向量）
-		Matrix<L2_AMT,		OUTPUT_AMT>		Wh2o;	 // 第二隐含层和输出层的突触（矩阵）
+		Matrix<L2_AMT,		OUTPUT_AMT>		Wh2o;	 // 第二隐层和输出层的权重（矩阵）
 
 	public:
 
-		BP(void) :
-			inputs(stdInputs), outputs(stdOutputs) { }
+		BP(void) : inputs(stdInputs), outputs(stdOutputs) { }
 
 		void init_inputs_and_outputs(const InputsType &inputs, const OutputsType &outputs)
 		{
@@ -59,8 +56,6 @@ class BP
 
 		void random_init(void)
 		{
-			H1h1.random_init(-1, 1);
-			H1h2.random_init(-1, 1);
 			Wih1.random_init(-1, 1);
 			Wh1h2.random_init(-1, 1);
 			Wh2o.random_init(-1, 1);
@@ -98,10 +93,8 @@ class BP
 			const BP<L1_AMT, L2_AMT> &best_bp = bp[minErrorIndex];
 			this->B1h1  =  best_bp.B1h1;
 			this->Wih1  =  best_bp.Wih1;
-			this->H1h1  =  best_bp.H1h1;
 			this->B1h2  =  best_bp.B1h2;
 			this->Wh1h2 =  best_bp.Wh1h2;
-			this->H1h2  =  best_bp.H1h2;
 			this->B1o   =  best_bp.B1o;
 			this->Wh2o  =  best_bp.Wh2o;
 
@@ -123,14 +116,10 @@ class BP
 				bp[i].B1h1.random_fix(0.01);
 				bp[i].Wih1  =  this->Wih1;
 				bp[i].Wih1.random_fix(0.01);
-				bp[i].H1h1  =  this->H1h1;
-				bp[i].H1h1.random_fix(0.01);
 				bp[i].B1h2  =  this->B1h2;
 				bp[i].B1h2.random_fix(0.01);
 				bp[i].Wh1h2 =  this->Wh1h2;
 				bp[i].Wh1h2.random_fix(0.01);
-				bp[i].H1h2  =  this->H1h2;
-				bp[i].H1h2.random_fix(0.01);
 				bp[i].B1o   =  this->B1o;
 				bp[i].B1o.random_fix(0.01);
 				bp[i].Wh2o  =  this->Wh2o;
@@ -148,10 +137,8 @@ class BP
 			{
 				this->B1h1  =  bp[minErrorIndex].B1h1;
 				this->Wih1  =  bp[minErrorIndex].Wih1;
-				this->H1h1  =  bp[minErrorIndex].H1h1;
 				this->B1h2  =  bp[minErrorIndex].B1h2;
 				this->Wh1h2 =  bp[minErrorIndex].Wh1h2;
-				this->H1h2  =  bp[minErrorIndex].H1h2;
 				this->B1o   =  bp[minErrorIndex].B1o;
 				this->Wh2o  =  bp[minErrorIndex].Wh2o;
 			}
